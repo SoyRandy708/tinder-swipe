@@ -21,7 +21,11 @@ function starDrag(e) {
     distance = currentX - initialX
     const deg = distance / 10
 
-    actualCard.style = `transform: translateX(${distance}px) rotate(${deg}deg)`
+    if (distance === 0) return
+
+    isAnimated = true
+
+    actualCard.style.transform = `translateX(${distance}px) rotate(${deg}deg)`
     actualCard.style.cursor = 'grabbing'
 
     const opacity = Math.abs(distance) / 100
@@ -64,10 +68,11 @@ function starDrag(e) {
       distance = 0
       isAnimated = false
 
-      actualCard
-        .querySelectorAll('.choice')
-        .forEach(choice => choice.style.opacity = 0)
     })
+
+    actualCard
+      .querySelectorAll('.choice')
+      .forEach(choice => choice.style.opacity = 0)
   }
 }
 
